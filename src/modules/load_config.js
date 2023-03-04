@@ -20,10 +20,10 @@ function loadProperty(name, default_value) {
 
 const loadConfig = () => {
     const min = loadProperty("min", 0);
-    const max = loadProperty("max", 10);
+    const max = loadProperty("max", 9);
     return {
         min : min,
-        max:max
+        max : max
     }
 }
 

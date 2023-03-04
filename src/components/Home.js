@@ -5,6 +5,10 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function getlength(number) {
+    return number.toString().length;
+}
+
 class Home extends Component {
     state = {
         number1: 0,
@@ -27,9 +31,14 @@ class Home extends Component {
     }
 
     render() {
+        console.log((Math.floor(this.props.config.max/10)*2));
         return (
             <main id="home">
-                <div className="calcul">
+                <div className="calcul" style={
+                    {
+                        width : (getlength(this.props.config.max)+3)+"ch"
+                    }
+                }>
                     <span className="number1">{this.state.number1}</span>
                     <span className="sign">{this.state.displaySign}</span>
                     <span className="number2">{this.state.number2}</span>
