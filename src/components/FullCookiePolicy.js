@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "../styles/CookiesPolicy.css"
+
 class FullCookiePolicy extends Component {
     render() {
         return (

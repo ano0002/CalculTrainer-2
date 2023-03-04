@@ -21,14 +21,14 @@ class Home extends Component {
 
     submit = () => {
         this.setState({
-            number1: random(this.props.min, this.props.max),
-            number2: random(this.props.min, this.props.max)
+            number1: random(this.props.config.min, this.props.config.max),
+            number2: random(this.props.config.min, this.props.config.max)
         });
     }
 
     render() {
         return (
-            <main>
+            <main id="home">
                 <div className="calcul">
                     <span className="number1">{this.state.number1}</span>
                     <span className="sign">{this.state.displaySign}</span>

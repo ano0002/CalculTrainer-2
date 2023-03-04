@@ -9,18 +9,22 @@ function safeSet(name, value) {
 function loadProperty(name, default_value) {
     const value = Cookies.get(name);
     if (value) {
-        window.name = value;
+        return value;
     }
     else {
         safeSet(name, default_value);
-        window.name = default_value;
+        return default_value;
     }
 }
 
 
 const loadConfig = () => {
-    loadProperty("min", 0);
-    loadProperty("max", 10);
+    const min = loadProperty("min", 0);
+    const max = loadProperty("max", 10);
+    return {
+        min : min,
+        max:max
+    }
 }
 
-export default loadTheme;
+export default loadConfig;

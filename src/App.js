@@ -24,13 +24,23 @@ import './styles/App.css';
 /* Modules */
 
 import load_theme from './modules/load_theme';
+import load_config from './modules/load_config';
 
 /* App */
 
 class App extends Component {
-  state = {
-    cookiesAccepted: Cookies.get('accepted_policy') ? true : false
+
+  constructor (props){
+    super(props);
+
+    load_theme();
+    const config = load_config();
+    this.state = {
+      cookiesAccepted: Cookies.get('accepted_policy') ? true : false,
+      config : config
+    }
   }
+
 
   acceptCookies = () => {
     Cookies.set('accepted_policy', true, { expires: 365 });
@@ -40,18 +50,14 @@ class App extends Component {
     this.setState({ cookiesAccepted: true });
   }
 
-  componentDidMount(){
-    load_theme();
-  }
-
   render(){
     const data = {
       menus: [
-        { link: '/', name: 'Home', element: <Home />, appearsInNav: true },
-        { link: '/theme', name: 'Theme', element: <Theme />, appearsInNav: true },
-        { link: '/settings', name: 'Settings', element: <Settings />, appearsInNav: true },
-        { link: '/login', name: 'Login', element: <Login />, appearsInNav: true },
-        { link: '/cookie-policy', name: 'Cookies', element: <FullCookiePolicy />, appearsInNav: false}
+        { link: '/', name: 'Home', element: <Home config={this.state.config}/>, appearsInNav: true },
+        { link: '/theme', name: 'Theme', element: <Theme config={this.state.config}/>, appearsInNav: true },
+        { link: '/settings', name: 'Settings', element: <Settings config={this.state.config}/>, appearsInNav: true },
+        { link: '/login', name: 'Login', element: <Login config={this.state.config}/>, appearsInNav: true },
+        { link: '/cookie-policy', name: 'Cookies', element: <FullCookiePolicy config={this.state.config}/>, appearsInNav: false}
       ]
     }
       
@@ -59,9 +65,9 @@ class App extends Component {
 
       <Router>
         <Header menus={data.menus}/>
-        <Main routes={data.menus}/>
+        <Main routes={data.menus} config={this.state.config}/>
         <Footer />
-        {this.state.cookiesAccepted ? '' : <CookiePolicy accept={this.acceptCookies} refuse={this.refuseCookies}/>}
+        {this.state.cookiesAccepted||window.location.pathname === "/cookie-policy" ? '' : <CookiePolicy accept={this.acceptCookies} refuse={this.refuseCookies}/>}
       </Router>
     );
   }
