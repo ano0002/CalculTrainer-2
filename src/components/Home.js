@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Results from "./Results";
 import "../styles/Home.css"
+import LineChart from "./Line";
 
 
 function random(min, max) {
@@ -100,8 +101,7 @@ class Home extends Component {
 
         this.calculCount++;
 
-        if (this.calculCount === parseInt(this.props.config.serieLength)) {
-            console.log(this.results);
+        if (this.calculCount === this.props.config.serieLength) {
             this.finalResults = this.results;
             this.results = [];
             this.end();
@@ -136,7 +136,12 @@ class Home extends Component {
                     <span className="time">{this.state.time}</span>
                     <button onClick={this.submit} >Submit</button>
                 </div>
-                <Results results={this.finalResults} sign={this.state.sign} />
+                <div className="data">
+                    <Results results={this.finalResults} sign={this.state.sign} />
+                    <div className="chart">
+                        <LineChart results={this.finalResults} sign={this.state.sign}/>
+                    </div>
+                </div>
             </main>
         );
     }

@@ -42,7 +42,7 @@
     z-index: 901;
     font-size: 200%;
     background-color: var(--primary_color);
-    width: 100%;
+    width: min(10rem, 100%);
     aspect-ratio: 1/1;  
     display: flex;
     justify-content: center;
@@ -146,6 +146,13 @@ input[type=number] {
         transform: rotate(45deg) translate(1rem, 1rem);
     }
 }
+#home .data{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 #home #results h1::after{
     content: "";
     position: absolute;
@@ -181,3 +188,6 @@ input[type=number] {
     text-decoration: line-through;
 }
 
+#home .data .chart{
+    width: 60vw;
+}

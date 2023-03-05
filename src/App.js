@@ -50,12 +50,19 @@ class App extends Component {
     this.setState({ cookiesAccepted: true });
   }
 
+  updateConfig = (config) => {
+    console.log(config);
+    this.setState({ config: config });
+  }
+
+
+  
   render(){
     const data = {
       menus: [
         { link: '/', name: 'Home', element: <Home config={this.state.config}/>, appearsInNav: true },
         { link: '/theme', name: 'Theme', element: <Theme config={this.state.config}/>, appearsInNav: true },
-        { link: '/settings', name: 'Settings', element: <Settings config={this.state.config}/>, appearsInNav: true },
+        { link: '/settings', name: 'Settings', element: <Settings config={this.state.config} updateConfig={this.updateConfig}/>, appearsInNav: true },
         { link: '/login', name: 'Login', element: <Login config={this.state.config}/>, appearsInNav: true },
         { link: '/cookie-policy', name: 'Cookies', element: <FullCookiePolicy config={this.state.config}/>, appearsInNav: false}
       ]
