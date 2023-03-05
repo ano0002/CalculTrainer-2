@@ -1,7 +1,6 @@
 
 #home{
     position: relative;
-    padding-top: 20vh;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -10,12 +9,13 @@
 
 #home .input{
     position: relative;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 80vh;
+    width: 20%;
+    font-size: 400%;
 
 }
 
@@ -28,6 +28,7 @@
 #home .input .start:focus {
     outline: none;
 }
+
 #home .input .start .blur{
     z-index: 900;
     position: absolute;
@@ -41,7 +42,7 @@
     z-index: 901;
     font-size: 200%;
     background-color: var(--primary_color);
-    width: 10%;
+    width: 100%;
     aspect-ratio: 1/1;  
     display: flex;
     justify-content: center;
@@ -62,7 +63,8 @@
     align-items: left;
     justify-content: center;
     position: relative;
-    font-size: 400%;
+    width: 100%;
+    border-bottom: 5px solid var(--cacti_color);
 }
 
 #home .input .calcul .sign{
@@ -75,16 +77,87 @@
     text-align: right;
 }
 
+#home .input input{
+    width: 100%;
+    text-align: right;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 100%;
+}
+
+#home .input input:focus{
+    outline: none;
+}
+
+
+/* hide arrows
+ Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+ 
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield !important;
+}
+
+#home .input .time{
+    font-size: 30%;
+    text-align: right;
+    width: 100%;
+}
+
 
 #home #results{
     width: 100%;
+}
+#home #results h1{
+    position: relative;
+    transform: translateY(-100%);
+    z-index: 1000;
+    width: fit-content;
+}
+#home #results h1::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 120%;
+    width: 1rem;
+    aspect-ratio: 1/1;
+    border-bottom: var(--cacti_color) 10px solid;
+    border-right: var(--cacti_color) 10px solid;
+    transform: rotate(45deg);
+    animation: downArrow 1s infinite alternate;
+}
+
+@keyframes downArrow{
+    from{
+        transform: rotate(45deg);
+    }
+    to{
+        transform: rotate(45deg) translate(1rem, 1rem);
+    }
+}
+#home #results h1::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 120%;
+    width: 1rem;
+    aspect-ratio: 1/1;
+    border-bottom: var(--cacti_color) 10px solid;
+    border-right: var(--cacti_color) 10px solid;
+    transform: rotate(45deg);
 }
 #home #results table{
     font-size: 200%;
     border-collapse: collapse;
     width: 100%;
 }
-#results td, #results th{
+#home #results td,#home #results th{
     border: 1px solid black;
     text-align: center;
     padding: 2% 1%;

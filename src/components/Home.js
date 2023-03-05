@@ -34,7 +34,7 @@ class Home extends Component {
         this.calculCount = 0;
         this.interval = setInterval(() => {
             let timer = new Date() - this.timer;
-            let time = Math.floor(timer / 1000) + "s : " + timer % 1000 + "ms";
+            let time = Math.floor(timer / 1000) + ":" + (timer % 1000).toString().padStart(3,"0");
             this.setState({ time: time }); 
             }, 1);
     }
@@ -85,7 +85,7 @@ class Home extends Component {
 
         let timer = new Date() - this.timer;
 
-        let time = Math.floor(timer / 1000) + "s : " + timer % 1000 + "ms";
+        let time = Math.floor(timer / 1000) + " : " + timer % 1000;
 
         this.results.push({
             number1: this.state.number1,
@@ -112,28 +112,29 @@ class Home extends Component {
         clearInterval(this.interval);
         this.setState({ time: "0s : 0ms" });
         document.querySelector("#home button.start").style.display = "block";
+        document.querySelector("#home button.start").focus();
     }
 
     render() {
         return (
             <main id="home">
-                <div className="input">
+                <div className="input" style={
+                        {
+                            width: (getlength(this.props.config.max)*1.2 + 3) + "ch"
+                        }
+                    }>
                     <button className="start">
                         <div className="blur"></div>
                         <p onClick={this.start}>Start</p>
                     </button>
-                    <div className="calcul" style={
-                        {
-                            width: (getlength(this.props.config.max) + 3) + "ch"
-                        }
-                    }>
+                    <div className="calcul">
                         <span className="number1">{this.state.number1}</span>
                         <span className="sign">{this.state.sign}</span>
                         <span className="number2">{this.state.number2}</span>
                     </div>
                     <input type="number" onKeyDown={this.validateInput} />
-                    <span className="time">Time: {this.state.time}</span>
-                    <input type="submit" value="Submit" onClick={this.submit} />
+                    <span className="time">{this.state.time}</span>
+                    <button onClick={this.submit} >Submit</button>
                 </div>
                 <Results results={this.finalResults} sign={this.state.sign} />
             </main>
