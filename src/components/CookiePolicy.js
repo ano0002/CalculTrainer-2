@@ -8,9 +8,14 @@ class CookiePolicy extends Component {
     hide = () => {
         document.getElementsByClassName("cookie-policy-container")[0].style.display = "none";
     }
+
+    preventAll = (e) => {
+        e.stopPropagation();
+    }
+
     render() {
         return ( <div className = "cookie-policy-container" >
-                <div id = "blur" > </div> 
+                <div className = "blur" onMouseOver={this.preventAll}> </div> 
                 <div className = "cookie-policy" >
                     <p> This website uses cookies to ensure you get the best experience on our website. <br / >
                         <NavLink to = "/cookie-policy" onClick={this.hide}> Learn more </NavLink> 

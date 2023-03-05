@@ -1,29 +1,92 @@
 
 #home{
+    position: relative;
+    padding-top: 20vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#home .input{
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
-    font-size: 400%;
+    min-height: 80vh;
+
 }
 
-#home .calcul{
+#home .input .start {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    inset: 0;
+}
+#home .input .start:focus {
+    outline: none;
+}
+#home .input .start .blur{
+    z-index: 900;
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(15px);
+    box-shadow: inset 0px 0px 11px 11px var(--secondary_color);
+}
+
+#home .input .start p{
+    position: relative;
+    z-index: 901;
+    font-size: 200%;
+    background-color: var(--primary_color);
+    width: 10%;
+    aspect-ratio: 1/1;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#home .input .start p:hover{
+    cursor: pointer;
+}
+
+#home .input .calcul{
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: center;
     position: relative;
+    font-size: 400%;
 }
 
-#home .calcul .sign{
+#home .input .calcul .sign{
     position: absolute;
     bottom: 0;
     left: 0;
 }
 
-#home .calcul span{
+#home .input .calcul span{
     text-align: right;
 }
 
+
+#home #results{
+    width: 100%;
+}
+#home #results table{
+    font-size: 200%;
+    border-collapse: collapse;
+    width: 100%;
+}
+#results td, #results th{
+    border: 1px solid black;
+    text-align: center;
+    padding: 2% 1%;
+}
 

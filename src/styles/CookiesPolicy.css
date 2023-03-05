@@ -1,7 +1,9 @@
-.cookie-policy-container #blur {
+.cookie-policy-container .blur {
     position: fixed;
     inset: 0;
     backdrop-filter: blur(5px);
+    pointer-events: none;
+    z-index: 999;
 }
 
 .cookie-policy-container .cookie-policy {
