@@ -85,7 +85,7 @@ class Home extends Component {
 
         let timer = new Date() - this.timer;
 
-        let time = Math.floor(timer / 1000) + " : " + timer % 1000;
+        let time = Math.floor(timer / 1000) + ":" + timer % 1000;
 
         this.results.push({
             number1: this.state.number1,
@@ -110,7 +110,7 @@ class Home extends Component {
 
     end = () => {
         clearInterval(this.interval);
-        this.setState({ time: "0s : 0ms" });
+        this.setState({ time: "0:000" });
         document.querySelector("#home button.start").style.display = "block";
         document.querySelector("#home button.start").focus();
     }
@@ -120,7 +120,7 @@ class Home extends Component {
             <main id="home">
                 <div className="input" style={
                         {
-                            width: (getlength(this.props.config.max)*1.2 + 3) + "ch"
+                            width: (getlength(this.props.config.max)**1.5 + 3) + "ch"
                         }
                     }>
                     <button className="start">
