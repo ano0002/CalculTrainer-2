@@ -17,9 +17,9 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            number1: random(this.props.config.min, this.props.config.max),
-            number2: random(this.props.config.min, this.props.config.max),
-            sign: "×"
+            number1: random(this.props.config.min1, this.props.config.max1),
+            number2: random(this.props.config.min2, this.props.config.max2),
+            sign: this.props.config.sign,
         };
 
         this.calculCount = 0;
@@ -42,8 +42,8 @@ class Home extends Component {
 
     newCalcul = () => {
         this.setState({
-            number1: random(this.props.config.min, this.props.config.max),
-            number2: random(this.props.config.min, this.props.config.max)
+            number1: random(this.props.config.min1, this.props.config.max1),
+            number2: random(this.props.config.min2, this.props.config.max2)
         });
         document.querySelector("input[type=number]").value = "";
         document.querySelector("input[type=number]").focus();
@@ -120,7 +120,7 @@ class Home extends Component {
             <main id="home">
                 <div className="input" style={
                         {
-                            width: (getlength(this.props.config.max)**1.5 + 3) + "ch"
+                            width: (Math.max(getlength(this.props.config.max1),getlength(this.props.config.max2))**1.5 + 3) + "ch"
                         }
                     }>
                     <button className="start">

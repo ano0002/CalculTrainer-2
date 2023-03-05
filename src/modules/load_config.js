@@ -19,13 +19,17 @@ function loadProperty(name, default_value) {
 
 
 const loadConfig = () => {
-    const min = parseInt(loadProperty("min", 0));
-    const max = parseInt(loadProperty("max", 9));
+    const min1 = parseInt(loadProperty("min1", 0));
+    const max1 = parseInt(loadProperty("max1", 9));
+    const min2 = parseInt(loadProperty("min2", 0));
+    const max2 = parseInt(loadProperty("max2", 9));
     const serieLength = parseInt(loadProperty("serieLength", 10));
     const sign = loadProperty("sign", "+");
     return {
-        min : min,
-        max : max,
+        min1 : min1,
+        max1 : max1,
+        min2 : min2,
+        max2 : max2,
         serieLength : serieLength,
         sign : sign
     }

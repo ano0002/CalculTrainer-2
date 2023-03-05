@@ -1,0 +1,22 @@
+.multi-range-slider .bar-right{
+    background-color: var(--kangaroo_orange);
+}
+
+.multi-range-slider .bar-left{
+    background-color: var(--kangaroo_orange);
+}
+.multi-range-slider .bar-inner{
+    background-color: var(--cacti_color);
+    border: 1px solid var(--ground_black);
+}
+.multi-range-slider .thumb::before{
+    background-color: var(--kangaroo_orange);
+    border: 1px solid var(--ground_black);
+}
+.multi-range-slider .bar-left,
+.multi-range-slider .bar-right,
+.multi-range-slider .bar-inner,
+.multi-range-slider .thumb::before{
+    border-radius: 1em;
+    box-shadow: none;
+}

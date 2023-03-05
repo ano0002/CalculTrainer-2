@@ -51,7 +51,6 @@ class App extends Component {
   }
 
   updateConfig = (config) => {
-    console.log(config);
     this.setState({ config: config });
   }
 
