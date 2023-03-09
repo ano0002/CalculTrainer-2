@@ -24,6 +24,7 @@
     background-color: transparent;
     border: none;
     inset: 0;
+    color: var(--ground_black);
 }
 #home .input .start:focus {
     outline: none;

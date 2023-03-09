@@ -60,22 +60,22 @@ class App extends Component {
     }
   }
 
-
   
   render(){
+    const root = '/projets/calcul-trainer2/';
     const data = {
       menus: [
-        { link: '/', name: 'Home', element: <Home config={this.state.config}/>, 
+        { link: root+'', name: 'Home', element: <Home config={this.state.config}/>, 
           appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true },
-        { link: '/theme', name: 'Theme', element: <Theme config={this.state.config} updateTheme={this.updateTheme}/>, 
+        { link: root+'theme', name: 'Theme', element: <Theme config={this.state.config} updateTheme={this.updateTheme}/>, 
           appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true },
-        { link: '/settings', name: 'Settings', element: <Settings config={this.state.config} updateConfig={this.updateConfig}/>, 
+        { link: root+'settings', name: 'Settings', element: <Settings config={this.state.config} updateConfig={this.updateConfig}/>, 
           appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true },
-        { link: '/login', name: 'Login', element: <Login config={this.state.config} updateConfig={this.updateConfig} updateTheme={this.updateTheme}/>, 
+        { link: root+'login', name: 'Login', element: <Login config={this.state.config} updateConfig={this.updateConfig} updateTheme={this.updateTheme}/>, 
           appearsInNav: true, showWhenLogged: false, showWhenNotLogged: true },
-        { link: '/cookie-policy', name: 'Cookies', element: <FullCookiePolicy config={this.state.config} />, 
+        { link: root+'cookie-policy', name: 'Cookies', element: <FullCookiePolicy config={this.state.config} />, 
           appearsInNav: false, showWhenLogged: true, showWhenNotLogged: true},
-        { link: '/dashboard', name: 'Dashboard', element: <Dashboard config={this.state.config} />,
+        { link: root+'dashboard', name: 'Dashboard', element: <Dashboard config={this.state.config} />,
           appearsInNav: true, showWhenLogged: true, showWhenNotLogged: false}
       ]
     }
