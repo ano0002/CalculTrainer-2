@@ -6,7 +6,8 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const [status, setStatus] = React.useState(null);
+    const [registerStatus, setRegisterStatus] = React.useState(null);
+    const [loginStatus, setLoginStatus] = React.useState(null);
     const [confirmPasswordHelper, setConfirmPasswordHelper] = React.useState(null);
 
 
@@ -26,19 +27,19 @@ export default function Login() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: username, email: email, password: password })
         };
-        setStatus("Loading");
+        setRegisterStatus("Loading");
         fetch('https://www.anatole-sot.xyz/api/calcul-trainer/signup.php', requestOptions)
             .then(response => response.json())
             .then(data => {
             if (data.status === "success") {
-                setStatus("Success");
+                setRegisterStatus("Success");
                 for (let element of document.querySelectorAll("#registerForm input")) {
                     element.value = "";
                 };
             } else {
-                setStatus("Error");
+                setRegisterStatus("Error");
                 setTimeout(() => {
-                    setStatus(null);
+                    setRegisterStatus(null);
                 }, 3000);
             }})
             .catch(error => console.log(error));
@@ -52,18 +53,19 @@ export default function Login() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, password: password })
+            body: JSON.stringify({ username: email, password: password })
         };
-        this.setState({status: "Loading"});
+        setLoginStatus("Loading");
         fetch('https://www.anatole-sot.xyz/api/calcul-trainer/login.php', requestOptions)
             .then(response => response.json())
             .then(data => {
+            console.log(data);
             if (data.status === "success") {
-                navigate("/home");
+                navigate("/");
             } else {
-                this.setState({status: "Error"});
+                setLoginStatus("Error");
                 setTimeout(() => {
-                    setStatus({status: null});
+                    setLoginStatus(null);
                 }, 3000);
             }})
             .catch(error => console.log(error));
@@ -83,17 +85,17 @@ export default function Login() {
     return (
         <div className="Login">
             <h1>Login</h1>
-            <form>
+            <form onSubmit={handleLogin} id="loginForm">
                 <div className="form-group">
                     <label htmlFor="email">Identifiant</label>
-                    <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email/username"/>
+                    <input type="text" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email/username"/>
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input type="password" className="form-control" id="password" placeholder="Password"/>
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className={"loginBtn "+(loginStatus ?? "")} disabled={loginStatus ? "disabled" : ""} >{loginStatus ?? "Submit"}</button>
             </form>
             <h1>Register</h1>
             <form onSubmit={handleRegister} id="registerForm">
@@ -115,7 +117,7 @@ export default function Login() {
                     <input type="password" className="form-control" id="confirmPassword" onKeyUp={registerSamePass} placeholder="Password"/>
                     <small id="confirmPasswordHelper">{confirmPasswordHelper}</small>
                 </div>
-                <button type="submit" className={"registerBtn "+(status ?? "")} disabled={status ? "disabled" : ""} >{status ?? "Submit"}</button>
+                <button type="submit" className={"registerBtn "+(registerStatus ?? "")} disabled={registerStatus ? "disabled" : ""} >{registerStatus ?? "Submit"}</button>
             </form>
         </div>
     );
