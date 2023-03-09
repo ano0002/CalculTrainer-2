@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
 
 export default function Login() {
 
@@ -61,7 +61,31 @@ export default function Login() {
             .then(data => {
             console.log(data);
             if (data.status === "success") {
-                navigate("/");
+                setLoginStatus("Success");
+                data = data.data;
+                Cookies.set("token", data.token, { expires: 365 });
+                const requestOptions = {
+                    method: 'GET'};
+                fetch('https://www.anatole-sot.xyz/api/calcul-trainer/get-user.php?token=' + data.token, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                    if (data.status === "success") {
+                        data = data.data;
+                        Cookies.set("primary_color", data.theme.primary_color, { expires: 365 });
+                        Cookies.set("secondary_color", data.theme.secondary_color, { expires: 365 });
+                        Cookies.set("kangarro_orange", data.theme.kangarro_orange, { expires: 365 });
+                        Cookies.set("cacti_color", data.theme.cacti_color, { expires: 365 });
+                        Cookies.set("ground_black", data.theme.ground_black, { expires: 365 });
+                        Cookies.set("sign",data.settings.OperationType,{expires:365});
+                        navigate("/");
+                    } else {
+                        setLoginStatus("Error");
+                        setTimeout(() => {
+                            setLoginStatus(null);
+                        }, 3000);
+                    }})
+                    .catch(error => console.log(error));
+
             } else {
                 setLoginStatus("Error");
                 setTimeout(() => {
