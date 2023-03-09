@@ -25,35 +25,87 @@ class Settings extends Component {
             value = event.target.value.trim();
         }
         this.setState({ [event.target.name]: value });
-        this.props.updateConfig({
+        const new_state = {
             ...this.state,
             [event.target.name]: value
-        });
+        }
+        this.props.updateConfig(new_state);
+        this.sendUpdate(new_state);
     }
 
     handleSlider1Input = (event) => {
-        if (Cookies.get("accepted_policy")) {
-            Cookies.set("min1", event.minValue, { expires: 365 });
-            Cookies.set("max1", event.maxValue, { expires: 365 });
+        if (this.state.min1 !== event.minValue ||
+            this.state.max1 !== event.maxValue ) {
+            if (Cookies.get("accepted_policy")) {
+                Cookies.set("min1", event.minValue, { expires: 365 });
+                Cookies.set("max1", event.maxValue, { expires: 365 });
+            }
+            this.setState({ min1: event.minValue, max1: event.maxValue });
+
+            const new_state = {
+                ...this.state,
+                min1: event.minValue,
+                max1: event.maxValue
+            }
+            this.props.updateConfig(new_state);
+            this.sendUpdate(new_state);
+
         }
-        this.setState({ min1: event.minValue, max1: event.maxValue });
-        this.props.updateConfig({
-            ...this.state,
-            min1: event.minValue,
-            max1: event.maxValue
-        });
     }
     handleSlider2Input = (event) => {
-        if (Cookies.get("accepted_policy")) {
-            Cookies.set("min2", event.minValue, { expires: 365 });
-            Cookies.set("max2", event.maxValue, { expires: 365 });
+        if (this.state.min2 !== event.minValue ||
+            this.state.max2 !== event.maxValue ) {
+            if (Cookies.get("accepted_policy")) {
+                Cookies.set("min2", event.minValue, { expires: 365 });
+                Cookies.set("max2", event.maxValue, { expires: 365 });
+            }
+            this.setState({ min2: event.minValue, max2: event.maxValue });
+            
+            const new_state = {
+                ...this.state,
+                min2: event.minValue,
+                max2: event.maxValue
+            }
+            this.props.updateConfig(new_state);
+            this.sendUpdate(new_state);
         }
-        this.setState({ min2: event.minValue, max2: event.maxValue });
-        this.props.updateConfig({
-            ...this.state,
-            min2: event.minValue,
-            max2: event.maxValue
-        });
+    }
+
+    sendUpdate = (config) => {
+        if (Cookies.get("accepted_policy")) {
+            if (Cookies.get("token")) {
+                fetch("https://anatole-sot.xyz/api/calcul-trainer/set-settings.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        token: Cookies.get("token"),
+                        settings:{
+                            OperationType: config.sign,
+                            Number1: config.min1 + "," + config.max1,
+                            Number2: config.min2 + "," + config.max2,
+                            SerieLength: config.serieLength
+                        }
+                      })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "failed") {
+                        console.log(data);
+                    }}
+                )
+                .catch(error => {
+                    console.log(error);
+                });
+            }
+        }
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            this.sendUpdate(this.state);
+        }, 5000);
     }
 
     render() {

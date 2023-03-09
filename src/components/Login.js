@@ -76,6 +76,11 @@ export default function Login(props) {
                         Cookies.set("cacti_color", data.theme.cacti_color, { expires: 365 });
                         Cookies.set("ground_black", data.theme.ground_black, { expires: 365 });
                         Cookies.set("sign",data.settings.OperationType,{expires:365});
+                        Cookies.set("min1",data.settings.Number1.split(",")[0],{expires:365});
+                        Cookies.set("max1",data.settings.Number1.split(",")[1],{expires:365});
+                        Cookies.set("min2",data.settings.Number2.split(",")[0],{expires:365});
+                        Cookies.set("max2",data.settings.Number2.split(",")[1],{expires:365});
+                        Cookies.set("serieLength",data.settings.SerieLength,{expires:365});
                         const [min1,max1] = data.settings.Number1.split(",");
                         const [min2,max2] = data.settings.Number2.split(",");
                         const serieLength = data.settings.SerieLength;
@@ -123,45 +128,57 @@ export default function Login(props) {
             setConfirmPasswordHelper(null);
         }
     }
-
-    return (
-        <div className="Login">
-            <h1>Login</h1>
-            <form onSubmit={handleLogin} id="loginForm">
-                <div className="form-group">
-                    <label htmlFor="email">Identifiant</label>
-                    <input type="text" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email/username"/>
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" className="form-control" id="password" placeholder="Password"/>
-                </div>
-                <button type="submit" className={"loginBtn "+(loginStatus ?? "")} disabled={loginStatus ? "disabled" : ""} >{loginStatus ?? "Submit"}</button>
-            </form>
-            <h1>Register</h1>
-            <form onSubmit={handleRegister} id="registerForm">
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" className="form-control" id="username" placeholder="Username"/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="registerEmail">Email address</label>
-                    <input type="email" className="form-control" id="registerEmail" aria-describedby="RegisterEmailHelp" placeholder="Enter email"/>
-                    <small id="RegisterEmailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="registerPassword">Password</label>
-                    <input type="password" className="form-control" id="registerPassword" onKeyUp={registerSamePass} placeholder="Password"/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="confirmPassword" >Confirm Password</label>
-                    <input type="password" className="form-control" id="confirmPassword" onKeyUp={registerSamePass} placeholder="Password"/>
-                    <small id="confirmPasswordHelper">{confirmPasswordHelper}</small>
-                </div>
-                <button type="submit" className={"registerBtn "+(registerStatus ?? "")} disabled={registerStatus ? "disabled" : ""} >{registerStatus ?? "Submit"}</button>
-            </form>
-        </div>
-    );
+    
+    if (Cookies.get("accepted_policy")){
+        return (
+            <div className="Login">
+                <h1>Login</h1>
+                <form onSubmit={handleLogin} id="loginForm">
+                    <div className="form-group">
+                        <label htmlFor="email">Identifiant</label>
+                        <input type="text" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email/username"/>
+                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" className="form-control" id="password" placeholder="Password"/>
+                    </div>
+                    <button type="submit" className={"loginBtn "+(loginStatus ?? "")} disabled={loginStatus ? "disabled" : ""} >{loginStatus ?? "Submit"}</button>
+                </form>
+                <h1>Register</h1>
+                <form onSubmit={handleRegister} id="registerForm">
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input type="text" className="form-control" id="username" placeholder="Username"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="registerEmail">Email address</label>
+                        <input type="email" className="form-control" id="registerEmail" aria-describedby="RegisterEmailHelp" placeholder="Enter email"/>
+                        <small id="RegisterEmailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="registerPassword">Password</label>
+                        <input type="password" className="form-control" id="registerPassword" onKeyUp={registerSamePass} placeholder="Password"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword" >Confirm Password</label>
+                        <input type="password" className="form-control" id="confirmPassword" onKeyUp={registerSamePass} placeholder="Password"/>
+                        <small id="confirmPasswordHelper">{confirmPasswordHelper}</small>
+                    </div>
+                    <button type="submit" className={"registerBtn "+(registerStatus ?? "")} disabled={registerStatus ? "disabled" : ""} >{registerStatus ?? "Submit"}</button>
+                </form>
+            </div>
+        );
+    } else {
+        return (
+            <div className="Login">
+                <h1>Login/Register is only available if you accept our cookie policy</h1>
+                <button onClick={() => {
+                    Cookies.set("accepted_policy",true,{expires:365});
+                    window.location.reload();
+                }}>Accept</button>
+            </div>
+        );
+    }
 }
 
