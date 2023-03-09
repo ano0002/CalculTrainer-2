@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
-export default function Login() {
+export default function Login(props) {
 
     const navigate = useNavigate();
 
@@ -59,7 +59,6 @@ export default function Login() {
         fetch('https://www.anatole-sot.xyz/api/calcul-trainer/login.php', requestOptions)
             .then(response => response.json())
             .then(data => {
-            console.log(data);
             if (data.status === "success") {
                 setLoginStatus("Success");
                 data = data.data;
@@ -77,6 +76,25 @@ export default function Login() {
                         Cookies.set("cacti_color", data.theme.cacti_color, { expires: 365 });
                         Cookies.set("ground_black", data.theme.ground_black, { expires: 365 });
                         Cookies.set("sign",data.settings.OperationType,{expires:365});
+                        const [min1,max1] = data.settings.Number1.split(",");
+                        const [min2,max2] = data.settings.Number2.split(",");
+                        const serieLength = data.settings.SerieLength;
+                        props.updateConfig({
+                            ...props.config,
+                            sign: data.settings.OperationType,
+                            min1: min1,
+                            max1: max1,
+                            min2: min2,
+                            max2: max2,
+                            serieLength: serieLength
+                        });
+                        props.updateTheme({
+                            primary_color: data.theme.primary_color,
+                            secondary_color: data.theme.secondary_color,
+                            kangarro_orange: data.theme.kangarro_orange,
+                            cacti_color: data.theme.cacti_color,
+                            ground_black: data.theme.ground_black
+                        });
                         navigate("/");
                     } else {
                         setLoginStatus("Error");
