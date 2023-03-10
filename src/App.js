@@ -31,64 +31,85 @@ import load_config from './modules/load_config';
 
 class App extends Component {
 
-  constructor (props){
-    super(props);
+    constructor (props){
+        super(props);
 
-    load_theme(Cookies.get("token"));
-    const config = load_config();
-    this.state = {
-      cookiesAccepted: Cookies.get('accepted_policy') ? true : false,
-      config : config
+        const theme = load_theme(Cookies.get("token"));
+        const config = load_config();
+        this.state = {
+            cookiesAccepted: Cookies.get('accepted_policy') ? true : false,
+            config : config,
+            theme : theme
+        }
     }
-  }
 
 
-  acceptCookies = () => {
-    Cookies.set('accepted_policy', true, { expires: 365 });
-    this.setState({ cookiesAccepted: true });
-  }
-  refuseCookies = () => {
-    this.setState({ cookiesAccepted: true });
-  }
-
-  updateConfig = (config) => {
-    this.setState({ config: config });
-  }
-  updateTheme = (theme) => {
-    for(const [key, value] of Object.entries(theme)){
-      document.documentElement.style.setProperty(`--${key}`, value);
+    acceptCookies = () => {
+        Cookies.set('accepted_policy', true, { expires: 365 });
+        this.setState({ cookiesAccepted: true });
     }
-  }
-  
-  render(){
-    const root = '/projets/calcul-trainer2/';
-    const data = {
-      menus: [
-        { link: root+'', name: 'Home', element: <Home config={this.state.config}/>, 
-          appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true },
-        { link: root+'theme', name: 'Theme', element: <Theme config={this.state.config} updateTheme={this.updateTheme}/>, 
-          appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true },
-        { link: root+'settings', name: 'Settings', element: <Settings config={this.state.config} updateConfig={this.updateConfig}/>, 
-          appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true },
-        { link: root+'login', name: 'Login', element: <Login config={this.state.config} updateConfig={this.updateConfig} updateTheme={this.updateTheme}/>, 
-          appearsInNav: true, showWhenLogged: false, showWhenNotLogged: true },
-        { link: root+'cookie-policy', name: 'Cookies', element: <FullCookiePolicy config={this.state.config} />, 
-          appearsInNav: false, showWhenLogged: true, showWhenNotLogged: true},
-        { link: root+'dashboard', name: 'Dashboard', element: <Dashboard config={this.state.config} />,
-          appearsInNav: true, showWhenLogged: true, showWhenNotLogged: false}
-      ]
+    refuseCookies = () => {
+        this.setState({ cookiesAccepted: true });
     }
-      
-    return (
 
-      <Router>
-        <Header menus={data.menus}/>
-        <Main routes={data.menus} config={this.state.config}/>
-        <Footer />
-        {this.state.cookiesAccepted||window.location.pathname === "/cookie-policy" ? '' : <CookiePolicy accept={this.acceptCookies} refuse={this.refuseCookies}/>}
-      </Router>
-    );
-  }
+    updateConfig = (config) => {
+        this.setState({ config: config });
+    }
+    updateTheme = (theme) => {
+        for(const [key, value] of Object.entries(theme)){
+            document.documentElement.style.setProperty(`--${key}`, value);
+            if (Cookies.get('accepted_policy')){
+                Cookies.set(key,value,{expires:365})              
+            }
+        }
+        this.setState({theme : {
+          ...this.state.theme,
+          ...theme
+        }})
+    }
+    
+    render(){
+        const root = '/projets/calcul-trainer2/';
+        const data = {
+            menus: [
+                {   
+                    link: root+'', name: 'Home', 
+                    element: <Home config={this.state.config}/>, 
+                    appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true 
+                },{ 
+                    link: root+'theme', name: 'Theme', 
+                    element: <Theme config={this.state.config} theme={this.state.theme} updateTheme={this.updateTheme}/>, 
+                    appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true 
+                },{ 
+                    link: root+'settings', name: 'Settings', 
+                    element: <Settings config={this.state.config} updateConfig={this.updateConfig}/>, 
+                    appearsInNav: true, showWhenLogged: true, showWhenNotLogged: true 
+                },{ 
+                    link: root+'login', name: 'Login', 
+                    element: <Login config={this.state.config} updateConfig={this.updateConfig} updateTheme={this.updateTheme}/>, 
+                    appearsInNav: true, showWhenLogged: false, showWhenNotLogged: true 
+                },{   
+                    link: root+'cookie-policy', name: 'Cookies', 
+                    element: <FullCookiePolicy config={this.state.config} />, 
+                    appearsInNav: false, showWhenLogged: true, showWhenNotLogged: true
+                },{ 
+                    link: root+'dashboard', name: 'Dashboard', 
+                    element: <Dashboard config={this.state.config} />,
+                    appearsInNav: true, showWhenLogged: true, showWhenNotLogged: false
+                }
+            ]
+        }
+            
+        return (
+
+            <Router>
+                <Header menus={data.menus}/>
+                <Main routes={data.menus} config={this.state.config}/>
+                <Footer />
+                {this.state.cookiesAccepted||window.location.pathname === "/cookie-policy" ? '' : <CookiePolicy accept={this.acceptCookies} refuse={this.refuseCookies}/>}
+            </Router>
+        );
+    }
 }
 
 export default App;

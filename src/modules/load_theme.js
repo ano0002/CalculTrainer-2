@@ -19,6 +19,13 @@ function loadProperty(name, default_value) {
 
 
 const loadTheme = (token = false) => {
+    var theme = {
+        primary_color : "#7D4E57",
+        secondary_color : "#E7F9A9",
+        cacti_color : "#09814A",
+        ground_black : "#1A1F16",
+        kangaroo_orange : "#FF8600"
+    };
     if(token){
         fetch('https://www.anatole-sot.xyz/api/calcul-trainer/get-user.php?token='+token, {
             method: 'GET'
@@ -26,30 +33,14 @@ const loadTheme = (token = false) => {
         .then(response => response.json())
         .then(data => {
             if(data.status === "success"){
-                data = data.data;
-                console.log(data);
-                loadProperty("primary_color", data.theme.primary_color);
-                loadProperty("secondary_color", data.theme.secondary_color);
-                loadProperty("cacti_color", data.theme.cacti_color);
-                loadProperty("ground_black", data.theme.ground_black);
-                loadProperty("kangaroo_orange", data.theme.kangaroo_orange);
-            }
-            else{
-                loadProperty("primary_color", "#7D4E57");
-                loadProperty("secondary_color", "#E7F9A9");
-                loadProperty("cacti_color", "#09814A");
-                loadProperty("ground_black", "#1A1F16");
-                loadProperty("kangaroo_orange", "#FF8600");
+                theme = data.data.theme;
             }
         })
-    }   
-    else{
-        loadProperty("primary_color", "#7D4E57");
-        loadProperty("secondary_color", "#E7F9A9");
-        loadProperty("cacti_color", "#09814A");
-        loadProperty("ground_black", "#1A1F16");
-        loadProperty("kangaroo_orange", "#FF8600");
     }
+    for (const [key,value] of Object.entries(theme)) {
+        loadProperty(key,value);
+    }
+    return theme
 }
 
 export default loadTheme;
