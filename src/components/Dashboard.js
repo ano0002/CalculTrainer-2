@@ -8,7 +8,7 @@ function Dashboard(props) {
 
     function logout() {
         Cookies.remove("token");
-        navigate("/login");
+        navigate("/projets/calcul-trainer2/login");
         window.location.reload();
     }
 
