@@ -100,7 +100,7 @@ export default function Login(props) {
                             cacti_color: data.theme.cacti_color,
                             ground_black: data.theme.ground_black
                         });
-                        navigate("/");
+                        navigate("/projets/calcul-trainer2/");
                     } else {
                         setLoginStatus("Error");
                         setTimeout(() => {

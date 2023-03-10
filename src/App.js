@@ -34,7 +34,7 @@ class App extends Component {
   constructor (props){
     super(props);
 
-    load_theme();
+    load_theme(Cookies.get("token"));
     const config = load_config();
     this.state = {
       cookiesAccepted: Cookies.get('accepted_policy') ? true : false,
@@ -59,7 +59,6 @@ class App extends Component {
       document.documentElement.style.setProperty(`--${key}`, value);
     }
   }
-
   
   render(){
     const root = '/projets/calcul-trainer2/';
