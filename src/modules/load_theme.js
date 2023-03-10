@@ -10,10 +10,12 @@ function loadProperty(name, default_value) {
     const value = Cookies.get(name);
     if (value) {
         document.documentElement.style.setProperty(`--${name}`, value);
+        return value
     }
     else {
         safeSet(name, default_value);
         document.documentElement.style.setProperty(`--${name}`,default_value);
+        return default_value
     }
 }
 
@@ -37,8 +39,9 @@ const loadTheme = (token = false) => {
             }
         })
     }
-    for (const [key,value] of Object.entries(theme)) {
-        loadProperty(key,value);
+    for (var [key,default_value] of Object.entries(theme)) {
+        const value = loadProperty(key,default_value);
+        theme[key] = value;
     }
     return theme
 }

@@ -16,19 +16,31 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            number1: random(this.props.config.min1, this.props.config.max1),
-            number2: random(this.props.config.min2, this.props.config.max2),
-            sign: this.props.config.sign,
-        };
-
+        if (props.enabled){
+            this.state = {
+                number1: random(this.props.config.min1, this.props.config.max1),
+                number2: random(this.props.config.min2, this.props.config.max2),
+                sign: this.props.config.sign,
+            };
+        }
+        else{
+            this.state = {
+                number1 : 12,
+                number2 : 34,
+                sign : "+"
+            }
+        }
         this.calculCount = 0;
         this.finalResults = [];
     }
 
     start = () => {
+        if (this.props.enabled === false){
+            return;
+        }
 
         document.querySelector("#home button.start").style.display = "none";
+        document.querySelector("input[type=number]").disabled = false;
 
         this.newCalcul();
 
@@ -113,6 +125,7 @@ class Home extends Component {
         this.setState({ time: "0:000" });
         document.querySelector("#home button.start").style.display = "block";
         document.querySelector("#home button.start").focus();
+        document.querySelector("input[type=number]").disabled = true;
     }
 
     render() {
@@ -120,7 +133,7 @@ class Home extends Component {
             <main id="home">
                 <div className="input" style={
                         {
-                            width: (Math.max(getlength(this.props.config.max1),getlength(this.props.config.max2))**1.5 + 3) + "ch"
+                            width: (Math.max(getlength(this.state.number1),getlength(this.state.number2))**1.5 + 3) + "ch"
                         }
                     }>
                     <button className="start">
@@ -132,7 +145,7 @@ class Home extends Component {
                         <span className="sign">{this.state.sign}</span>
                         <span className="number2">{this.state.number2}</span>
                     </div>
-                    <input type="number" onKeyDown={this.validateInput} />
+                    <input type="number" onKeyDown={this.validateInput} disabled/>
                     <span className="time">{this.state.time}</span>
                     <button onClick={this.submit} >Submit</button>
                 </div>
