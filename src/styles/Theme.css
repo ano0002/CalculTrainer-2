@@ -1,0 +1,7 @@
+#theme{
+    position: relative;
+}
+#theme section{
+    position: absolute;
+    top: 0;
+}
