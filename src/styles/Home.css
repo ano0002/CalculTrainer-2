@@ -35,14 +35,15 @@
     position: absolute;
     inset: 0;
     backdrop-filter: blur(15px);
-    box-shadow: inset 0px 0px 11px 11px var(--secondary_color);
+    box-shadow: inset 0px 0px 11px 11px var(--primary_color);
 }
 
 #home .input .start p{
     position: relative;
     z-index: 901;
     font-size: 200%;
-    background-color: var(--primary_color);
+    background-color: var(--secondary_color);
+    color: var(--ground_black);
     width: min(10rem, 100%);
     aspect-ratio: 1/1;  
     display: flex;

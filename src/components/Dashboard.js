@@ -6,6 +6,9 @@ function Dashboard(props) {
     
     const navigate = useNavigate();
 
+    [user, setUser] = useState(null);
+
+
     function logout() {
         Cookies.remove("token");
         navigate("/projets/calcul-trainer2/login");
@@ -15,6 +18,8 @@ function Dashboard(props) {
     return (
         <main>
             <h1>Dashboard</h1>
+            <h2>Bienvenue {user}</h2>
+
             <button onClick={logout}>Logout</button>
         </main>
     );
