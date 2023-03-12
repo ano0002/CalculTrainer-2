@@ -17,7 +17,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
 
-        if (props.enabled){
+        if (props.enabled !== false){
             this.state = {
                 number1: random(this.props.config.min1, this.props.config.max1),
                 number2: random(this.props.config.min2, this.props.config.max2),

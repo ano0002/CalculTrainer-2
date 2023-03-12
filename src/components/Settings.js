@@ -19,7 +19,7 @@ class Settings extends Component {
             value = parseInt(event.target.value.trim());
         }
         else if (event.target.value.trim() === "") {
-            value = 0;
+            value = 1;
         }
         else {
             value = event.target.value.trim();
@@ -29,6 +29,7 @@ class Settings extends Component {
             ...this.state,
             [event.target.name]: value
         }
+        console.log(new_state);
         this.props.updateConfig(new_state);
         this.sendUpdate(new_state);
     }
@@ -160,7 +161,7 @@ class Settings extends Component {
                     </div>
                     <div className="serieLength">
                         <label htmlFor="serieLength">Serie Length</label>
-                        <input type="number" name="serieLength" value={this.state.serieLength} id="serieLength" onInput={this.handleInput} />
+                        <input type="number" name="serieLength" value={this.state.serieLength} id="serieLength" onInput={this.handleInput} min={1}/>
                     </div>
                 </form>
             </main>
