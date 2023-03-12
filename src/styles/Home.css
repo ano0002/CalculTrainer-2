@@ -14,6 +14,7 @@
     align-items: center;
     justify-content: center;
     min-height: 80vh;
+    max-height: 85vh;
     width: 20%;
     font-size: 400%;
 
@@ -94,7 +95,7 @@
 
 @media screen and (prefers-contrast: more) {
     #home .input input:focus{
-        outline: 1px solid var(--primary_color);
+        outline: 1px solid var(--cacti_color);
     }
 }
 
@@ -192,4 +193,54 @@
 
 #home .data .chart{
     width: 60vw;
+}
+
+@media screen and (orientation:portrait){
+    #home .input{
+        width: 80%;
+    }
+    #home .input .calcul{
+        width: 100%;
+    }
+    #home .input .calcul .sign{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    #home .input .calcul span{
+        text-align: right;
+    }
+    #home .input input{
+        width: 100%;
+        text-align: right;
+    }
+    #home .input input:focus{
+        outline: none;
+    }
+    #home .input .time{
+        font-size: 30%;
+        text-align: right;
+        width: 100%;
+    }
+    #home .data{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    #home #results table{
+        font-size: 150%;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #home #results td,#home #results th{
+        text-align: center;
+        padding: 2% 1%;
+        width: 20%;
+    }
+    #home .data .chart{
+        width: 100%;
+    }
+    #home .data .chart canvas{
+        width: 100%;
+    }
 }

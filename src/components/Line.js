@@ -39,13 +39,13 @@ class LineChart extends React.Component {
             scales: {
                 y:{
                     ticks:{
-                        color: 'white',
+                        color: Cookies.get("cacti_color") ?? "#09814A",
                         fontSize: 12,
                     }
                 },
                 x: {
                     ticks:{
-                        color: 'white',
+                        color: Cookies.get("cacti_color") ?? "#09814A",
                         fontSize: 12,
                     }
                 }
@@ -57,8 +57,8 @@ class LineChart extends React.Component {
                 {
                     label: '',
                     data: this.props.results.map((item) =>item.time/1000),
-                    borderColor: Cookies.get("cacti-color") ?? "#09814A",
-                    backgroundColor: Cookies.get("cacti-color") ?? "#09814A",
+                    borderColor: Cookies.get("cacti_color") ?? "#09814A",
+                    backgroundColor: Cookies.get("cacti_color") ?? "#09814A",
                 },
             ]
         }

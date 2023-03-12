@@ -4,6 +4,17 @@ import Cookies from 'js-cookie';
 
 
 class Navigation extends Component {
+
+    toggleMenu = () => {
+        let menu = document.querySelector("nav ul");
+        menu.classList.toggle("show");
+    }
+
+    hideMenu = () => {
+        let menu = document.querySelector("nav ul");
+        menu.classList.remove("show");
+    }
+
     render() {
         let displayItems = [];
         for (const {link,name,appearsInNav,showWhenLogged,showWhenNotLogged} of this.props.menus) {
@@ -13,20 +24,25 @@ class Navigation extends Component {
             if (appearsInNav) {
                 if (Cookies.get("token")){
                     if (showWhenLogged) {
-                        displayItems.push(<li key={name}><NavLink to={link}>{name}</NavLink></li>);
+                        displayItems.push(<li key={name}><NavLink onClick={this.hideMenu} to={link}>{name}</NavLink></li>);
                     }
                 }
                 else {
                     if (showWhenNotLogged) {
-                        displayItems.push(<li key={name}><NavLink to={link}>{name}</NavLink></li>);
+                        displayItems.push(<li key={name}><NavLink onClick={this.hideMenu} to={link}>{name}</NavLink></li>);
                     }
                 }
             }
         }
         return (
-            <ul>
-                {displayItems}
-            </ul>
+            <nav>
+                <i className="material-symbols-outlined" onClick={this.toggleMenu}>
+                    menu
+                </i>
+                <ul>
+                    {displayItems}
+                </ul>
+            </nav>
         );
     }
 }

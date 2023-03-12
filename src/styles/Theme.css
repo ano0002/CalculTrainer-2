@@ -5,3 +5,8 @@
     position: absolute;
     top: 0;
 }
+
+#theme section input[type="color"]{
+    border: none;
+    background-color: transparent;
+}
