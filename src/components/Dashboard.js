@@ -63,8 +63,9 @@ function Dashboard(props) {
             if(data.status !== "success") {
                 navigate(loginPage);
             } else {
-                const button = e.target.nodeName === "I" ? e.target.parentElement : e.target;
-                const line = button.parentElement.parentElement;
+                let button = e.target.nodeName === "I" ? e.target.parentElement : e.target;
+                const cell = button.parentElement;
+                const line = cell.parentElement;
                 const id = line.getAttribute("data-id");
                 const serie = data.data.series[id];
                 const calculs = JSON.parse(serie.Calculs);
@@ -106,13 +107,15 @@ function Dashboard(props) {
                 `;
                 tr.appendChild(td);
                 table.insertBefore(tr, line.nextSibling);
-                button.removeEventListener("click", showMore);
+                cell.removeChild(button);
+                button = document.createElement("button");
                 button.addEventListener("click", hideMore);
                 button.innerHTML = `
                 <i class="material-symbols-outlined">
                     -
                 </i>
                 `;
+                cell.appendChild(button);
             }
         })
         .catch(error => {
@@ -121,17 +124,21 @@ function Dashboard(props) {
     }
 
     function hideMore(e) {
-        const button = e.target.nodeName === "I" ? e.target.parentElement : e.target;
-        const line = button.parentElement.parentElement;
+        let button = e.target.nodeName === "I" ? e.target.parentElement : e.target;
+        const cell = button.parentElement;
+        const line = cell.parentElement;
         const table = line.parentElement;
         const tr = line.nextSibling;
         table.removeChild(tr);
-        button.removeEventListener("click", hideMore);
+        cell.removeChild(button);
+        button = document.createElement("button");
+        button.addEventListener("click", showMore);
         button.innerHTML = `
         <i class="material-symbols-outlined">
             +
         </i>
         `;
+        cell.appendChild(button);
     }
 
     return (
