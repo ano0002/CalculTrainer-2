@@ -1,0 +1,36 @@
+#dashboard table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+#dashboard table thead{
+    background-color:var(--secondary_color);
+    color:var(--ground_black);
+}
+
+#dashboard table td:not(:nth-of-type(3n)),
+#dashboard table th{
+    padding:0.5em;
+    border:1px solid var(--cacti_color);
+}
+
+#dashboard table td:nth-of-type(3n){
+    text-align:center;
+    border: 1px solid var(--cacti_color);
+}
+
+#dashboard .material-symbols-outlined{
+    font-size:100%;
+}
+
+#dashboard table button{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--cacti_color);
+    font-size: 1.5em;
+    cursor: pointer;
+    
+}

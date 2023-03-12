@@ -56,7 +56,7 @@ class LineChart extends React.Component {
             datasets: [
                 {
                     label: '',
-                    data: this.props.results.map((item) => parseFloat(item.time.replace(":", "."))),
+                    data: this.props.results.map((item) =>item.time/1000),
                     borderColor: Cookies.get("cacti-color") ?? "#09814A",
                     backgroundColor: Cookies.get("cacti-color") ?? "#09814A",
                 },

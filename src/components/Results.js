@@ -27,7 +27,7 @@ class Results extends Component {
                                 <tr key={index} className={result.correct ? "correct" : "incorrect"}>
                                     <td>{result.number1+this.props.sign+result.number2+"="+result.result}</td>
                                     <td>{result.userResult}</td>
-                                    <td>{result.time}</td>
+                                    <td>{Math.floor(result.time / 1000) + ":" + result.time % 1000}</td>
                                 </tr>
                             )
                         })}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Results from "./Results";
 import "../styles/Home.css"
 import LineChart from "./Line";
+import Cookies from "js-cookie";
 
 
 function random(min, max) {
@@ -96,9 +97,8 @@ class Home extends Component {
         }
         const userValue = parseInt(document.querySelector("input[type=number]").value);
 
-        let timer = new Date() - this.timer;
+        let time = new Date() - this.timer;
 
-        let time = Math.floor(timer / 1000) + ":" + timer % 1000;
 
         this.results.push({
             number1: this.state.number1,
@@ -126,6 +126,28 @@ class Home extends Component {
         document.querySelector("#home button.start").style.display = "block";
         document.querySelector("#home button.start").focus();
         document.querySelector("input[type=number]").disabled = true;
+        if (Cookies.get("token")){
+            fetch("https://anatole-sot.xyz/api/calcul-trainer/new_serie.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    token: Cookies.get("token"),
+                    calculs: this.finalResults.map(calcul => { return { calcul:calcul.number1 + this.props.config.sign + calcul.number2, result: calcul.result, userResult: calcul.userResult, correct: calcul.correct, time: calcul.time } } ),
+                    config: this.props.config
+                })
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.error){
+                    console.log(res.error);
+                }
+                else{
+                    console.log(res);
+                }
+            })
+        }
     }
 
     render() {

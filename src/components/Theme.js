@@ -1,12 +1,42 @@
 import React,{Component} from "react";
 import Home from "./Home"
+import Cookies from "js-cookie";
+
 import "../styles/Theme.css"
+
+
 
 class Theme extends Component {
 
     constructor (props){
         super(props)
         this.theme = this.props.theme
+    }
+
+    sendUpdate = (theme) => {
+        if (Cookies.get("accepted_policy")) {
+            if (Cookies.get("token")) {
+                fetch("https://anatole-sot.xyz/api/calcul-trainer/set-theme.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        token: Cookies.get("token"),
+                        theme: theme
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "failed") {
+                        console.log(data);
+                    }}
+                )
+                .catch(error => {
+                    console.log(error);
+                });
+            }
+        }
     }
 
     onChange = (e) => {
@@ -17,7 +47,10 @@ class Theme extends Component {
             [name] : value
         }
         this.props.updateTheme(this.theme);
+        this.sendUpdate(this.theme);
     }
+
+
 
     componentDidUpdate(){
         console.log()
