@@ -9,6 +9,10 @@ header{
     box-sizing: border-box;
 }
 
+header img{
+    width: 10vh
+}
+
 header nav {
     width: 40%;
 }

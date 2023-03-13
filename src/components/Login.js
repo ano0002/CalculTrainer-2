@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
+import "../styles/Login.css";
+
 export default function Login(props) {
 
     const navigate = useNavigate();
@@ -129,15 +131,20 @@ export default function Login(props) {
         }
     }
     
+    const showEmailHelper = (e) => {
+        let helper = document.getElementById("emailHelper");
+        helper.classList.toggle("hide");
+    }
+
+
     if (Cookies.get("accepted_policy")){
         return (
-            <div className="Login">
-                <h1>Login</h1>
+            <div id="login">
                 <form onSubmit={handleLogin} id="loginForm">
+                    <h1>Login</h1>
                     <div className="form-group">
                         <label htmlFor="email">Identifiant</label>
-                        <input type="text" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email/username"/>
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <input type="text" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter username"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
@@ -145,16 +152,24 @@ export default function Login(props) {
                     </div>
                     <button type="submit" className={"loginBtn "+(loginStatus ?? "")} disabled={loginStatus ? "disabled" : ""} >{loginStatus ?? "Submit"}</button>
                 </form>
-                <h1>Register</h1>
                 <form onSubmit={handleRegister} id="registerForm">
+                    <h1>Register</h1>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input type="text" className="form-control" id="username" placeholder="Username"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="registerEmail">Email address</label>
-                        <input type="email" className="form-control" id="registerEmail" aria-describedby="RegisterEmailHelp" placeholder="Enter email"/>
-                        <small id="RegisterEmailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <div className="input-group">
+                            <input type="email" className="form-control" id="registerEmail" aria-describedby="RegisterEmailHelp" placeholder="Enter email"/>
+                            <i class="material-symbols-outlined" onClick={showEmailHelper}>
+                                info
+                            </i>
+                        </div>
+                        <small id="emailHelper" className="hide">
+                            Your email will be used to recover your account if you forget your password<br/>
+                            It will never be shared with anyone else
+                        </small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="registerPassword">Password</label>

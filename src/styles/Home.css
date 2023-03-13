@@ -32,7 +32,7 @@
 }
 
 #home .input .start .blur{
-    z-index: 900;
+    z-index: 1;
     position: absolute;
     inset: 0;
     backdrop-filter: blur(15px);
