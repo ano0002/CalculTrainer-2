@@ -1,3 +1,14 @@
+#dashboard .userInfo{
+    padding: 2%;
+}
+
+#dashboard>h2{
+    text-align:center;
+    color:var(--cacti_color);
+    font-size:2em;
+    margin:0;
+}
+
 #dashboard table{
     width:100%;
     border-collapse:collapse;

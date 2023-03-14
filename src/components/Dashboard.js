@@ -143,11 +143,12 @@ function Dashboard(props) {
 
     return (
         <main id="dashboard">
-            <h1>Dashboard</h1>
-            <h2>Bienvenue {user}
-                <span> ({email})</span>
-            </h2>
-            <button onClick={logout}>Logout</button>
+            <section className="userInfo">
+                <h2>Bienvenue {user}
+                    <span> ({email})</span>
+                </h2>
+                <button onClick={logout}>Logout</button>
+            </section>
             <h2>Mes séries</h2>
             <table>
                 <thead>
