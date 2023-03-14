@@ -94,7 +94,7 @@ class App extends Component {
                     appearsInNav: false, showWhenLogged: true, showWhenNotLogged: true
                 },{ 
                     link: root+'dashboard', name: 'Dashboard', 
-                    element: <Dashboard config={this.state.config} />,
+                    element: <Dashboard config={this.state.config}  updateConfig={this.updateConfig} />,
                     appearsInNav: true, showWhenLogged: true, showWhenNotLogged: false
                 }
             ]

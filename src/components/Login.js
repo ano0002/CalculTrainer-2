@@ -162,7 +162,7 @@ export default function Login(props) {
                         <label htmlFor="registerEmail">Email address</label>
                         <div className="input-group">
                             <input type="email" className="form-control" id="registerEmail" aria-describedby="RegisterEmailHelp" placeholder="Enter email"/>
-                            <i class="material-symbols-outlined" onClick={showEmailHelper}>
+                            <i className="material-symbols-outlined" onClick={showEmailHelper}>
                                 info
                             </i>
                         </div>

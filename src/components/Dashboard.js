@@ -6,7 +6,9 @@ import "../styles/Dashboard.css"
 
 let sum = (...para) => para.reduce((d,b) => d + b,0);
 
-let loginPage = "/projets/calcul-trainer2/login";
+let root = "/projets/calcul-trainer2/";
+
+let loginPage = root+"login";
 
 function Dashboard(props) {
     
@@ -141,6 +143,32 @@ function Dashboard(props) {
         cell.appendChild(button);
     }
 
+    function replayConfig(e){
+        let button = e.target.nodeName === "I" ? e.target.parentElement : e.target;
+        const cell = button.parentElement;
+        const line = cell.parentElement;
+        const id = line.getAttribute("data-id");fetch("https://anatole-sot.xyz/api/calcul-trainer/get-series.php?token="+Cookies.get("token"), {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status !== "success") {
+                navigate(loginPage);
+            } else {
+                const serie = data.data.series[id];
+                const config = JSON.parse(serie.Config);
+                props.updateConfig(config);
+                navigate(root);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     return (
         <main id="dashboard">
             <section className="userInfo">
@@ -176,7 +204,7 @@ function Dashboard(props) {
                                     </button>
                                 </td>
                                 <td>
-                                    <button>
+                                    <button onClick={replayConfig}>
                                     <i className="material-symbols-outlined">
                                     replay
                                     </i>

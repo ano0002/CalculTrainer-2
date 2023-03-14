@@ -62,7 +62,6 @@ class Theme extends Component {
             <main id="theme">
                 <Home enabled={false}></Home>
                 <section>
-                    <h1>Theme</h1>
                     <div>
                         <h2>Primary Color</h2>
                         <input type="color" name="primary_color" value={this.props.theme.primary_color} onInput={this.onChange}></input>

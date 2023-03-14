@@ -1,10 +1,9 @@
 #login {
     width: 100%;
-    min-height: 80vh;
+    min-height: 83vh;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    flex-direction: column;
 }
 
 #login form{
@@ -37,7 +36,7 @@
     border-bottom: 2px solid var(--cacti_color);
     border-radius: 0;
     padding: 0 10px;
-    margin: 10px 0;
+    margin: 6px 0;
 }
 
 #login form .form-group .input-group i{
@@ -112,5 +111,12 @@
     }
     100%{
         transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+
+@media screen and (orientation: portrait) {
+    #login {
+        flex-direction: column;
     }
 }

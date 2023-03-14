@@ -51,6 +51,8 @@ class Home extends Component {
             let time = Math.floor(timer / 1000) + ":" + (timer % 1000).toString().padStart(3,"0");
             this.setState({ time: time }); 
             }, 1);
+        let calcul = document.querySelector("#home .calcul");
+        calcul.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     newCalcul = () => {
@@ -140,11 +142,8 @@ class Home extends Component {
             })
             .then(res => res.json())
             .then(res => {
-                if (res.error){
-                    console.log(res.error);
-                }
-                else{
-                    console.log(res);
+                if (!res.status === "success"){
+                    console.error(res);
                 }
             })
         }

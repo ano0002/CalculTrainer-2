@@ -4,9 +4,22 @@
 #theme section{
     position: absolute;
     top: 0;
+    padding: 2%;
+    z-index: 999;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2%;
 }
 
 #theme section input[type="color"]{
     border: none;
-    background-color: transparent;
+    background-color: var(--secondary_color);
+}
+
+#theme section input[type="color"]:hover{
+    cursor: pointer;
+}
+
+#theme section h2{
+    font-size: 100%;
 }

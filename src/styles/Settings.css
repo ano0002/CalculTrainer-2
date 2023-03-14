@@ -1,17 +1,15 @@
-.multi-range-slider .bar-right{
-    background-color: var(--kangaroo_orange);
-}
-
+.multi-range-slider .bar-right,
 .multi-range-slider .bar-left{
-    background-color: var(--kangaroo_orange);
+    background-color: var(--secondary_color);
 }
 .multi-range-slider .bar-inner{
     background-color: var(--cacti_color);
     border: 1px solid var(--ground_black);
 }
 .multi-range-slider .thumb::before{
-    background-color: var(--kangaroo_orange);
-    border: 1px solid var(--ground_black);
+    background-color: var(--cacti_color);
+    border: 1px solid var(--secondary_color);
+    scale: 0.75;
 }
 .multi-range-slider .bar-left,
 .multi-range-slider .bar-right,
@@ -19,4 +17,75 @@
 .multi-range-slider .thumb::before{
     border-radius: 1em;
     box-shadow: none;
+}
+
+#config{
+    padding: 2%;
+}
+
+#config h1{
+    text-align: center;
+}
+
+#config .select-wrapper{
+    position: relative;
+    width: max-content;
+}
+
+#config select {
+    display: block;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    background-color: var(--secondary_color);
+    color: var(--ground_black);
+    padding: 4%;
+    border : 2px solid var(--secondary_color);
+    transition: all 0.2s ease-in-out;
+}
+
+#config select::-ms-expand {
+    display: none;
+}
+
+#config select:hover {
+    color: var(--cacti_color);
+    background-color: var(--primary_color);
+}
+
+#config .select-wrapper div {
+    color: var(--ground_black);
+    background-color: var(--secondary_color);
+    position: absolute;
+    top: calc(2px + 6%);
+    right: 0;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+}
+#config .select-wrapper:hover div{
+    color: var(--cacti_color);
+    background-color: var(--primary_color);
+}
+
+#config input{
+    background-color: var(--secondary_color);
+    color: var(--ground_black);
+    padding: min(2%,10px);
+    border : 2px solid var(--secondary_color);
+    transition: all 0.2s ease-in-out;
+}
+
+#config form>div {
+    margin: 2% 0;
+    padding: 2% 0;
+}
+#config form>div:not(:last-child){
+    border-bottom: 3px solid var(--cacti_color);
 }

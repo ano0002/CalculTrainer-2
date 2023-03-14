@@ -115,13 +115,18 @@ class Settings extends Component {
                 <h1>Settings</h1>
                 <form>
                     <div className="sign">
-                        <label htmlFor="sign">Operation Type</label>
-                        <select name="sign" value={this.state.sign} id="operationType" onInput={this.handleInput}>
-                            <option value="+">Addition</option>
-                            <option value="-">Subtraction</option>
-                            <option value="×">Multiplication</option>
-                            <option value="/">Euclidian Division</option>
-                        </select>
+                        <label htmlFor="sign">Operation Type :</label>
+                        <div className="select-wrapper">
+                            <select name="sign" value={this.state.sign} id="operationType" onInput={this.handleInput}>
+                                <option value="+">Addition</option>
+                                <option value="-">Subtraction</option>
+                                <option value="×">Multiplication</option>
+                                <option value="/">Euclidian Division</option>
+                            </select>
+                            <div class="material-symbols-outlined">
+                            expand_more
+                            </div>
+                        </div>
                     </div>
                     <div className="number1">
                         <label htmlFor="number1">Number 1</label>
@@ -160,7 +165,7 @@ class Settings extends Component {
                         />
                     </div>
                     <div className="serieLength">
-                        <label htmlFor="serieLength">Serie Length</label>
+                        <label htmlFor="serieLength">Serie Length : </label>
                         <input type="number" name="serieLength" value={this.state.serieLength} id="serieLength" onInput={this.handleInput} min={1}/>
                     </div>
                 </form>
