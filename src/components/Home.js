@@ -168,7 +168,7 @@ class Home extends Component {
                     </div>
                     <input type="number" onKeyDown={this.validateInput} disabled/>
                     <span className="time">{this.state.time}</span>
-                    <button onClick={this.submit} >Submit</button>
+                    <button onClick={this.submit} className="submit-button" >Submit</button>
                 </div>
                 <div className="data">
                     <Results results={this.finalResults} sign={this.state.sign} />

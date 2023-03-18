@@ -118,6 +118,22 @@
     width: 100%;
 }
 
+#home .input .submit-button{
+    background-color: var(--secondary_color);
+    color: var(--ground_black);
+    border: 5px solid var(--secondary_color);
+    outline: none;
+    font-size: 20%;
+    padding: 5%;
+    transition: all 0.5s;
+    border-radius: 1em;
+    margin-top: 15%;
+}
+
+
+#home .input .submit-button:hover{
+    transform: scale(1.2);
+}
 
 #home #results{
     width: 100%;

@@ -1,6 +1,19 @@
 #dashboard .userInfo{
     padding: 2%;
 }
+#dashboard .userInfo button{
+    background-color: var(--secondary_color);
+    color: var(--ground_black);
+    border: 5px solid var(--secondary_color);
+    outline: none;
+    font-size: 100%;
+    padding: 1%;
+    transition: all 0.5s;
+    border-radius: 1em;
+}
+#dashboard .userInfo button:hover{
+    transform: scale(1.2);
+}
 
 #dashboard>h2{
     text-align:center;
@@ -44,4 +57,9 @@
     font-size: 1.5em;
     cursor: pointer;
     
+}
+#dashboard .serie__body .incorrect{
+    color:var(--kangaroo_orange);
+    text-decoration: line-through;
+    margin-right: 1%;
 }
